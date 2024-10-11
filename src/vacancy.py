@@ -16,6 +16,8 @@ class FilterVacancy(Vacancy):
     __slots__ = ("filter_words", "json_answer")
 
     def _Vacancy__filter_vacancies(self, filter_words: str, json_answer: list[dict[Any]]) -> list[dict[Any]]:
+        """Метод фильтрует список с вакансиями с сайта hh.ru и возвращает читаемый формат с 4 показателями:
+        Названием вакансии, ссылкой на вакансию, зарплатой и требуемым опытом работы"""
         self.result_list: list = []
         try:
             if isinstance(filter_words, str):
@@ -62,6 +64,7 @@ class FilterVacancySalary(VacancySalary):
     __slots__ = ("sorted_list", "user_from")
 
     def _VacancySalary__salary_range(self, sorted_list: list[dict[Any]], user_from: int = 0) -> list[dict[Any]] | list:
+        """Метод фильтрации вакансий по зарплате, значение ОТ получаем от пользователя"""
         self.result: list = []
         try:
             for data in sorted_list:
@@ -88,6 +91,7 @@ class SortedVacancyTop(VacancyTop):
     __slots__ = ("sorted_data", "top_n")
 
     def _VacancyTop__sorted_top_n(self, sorted_data: list[dict[Any]], top_n: int = 5) -> list[dict[Any]] | list:
+        """Метод сортирует список вакансий по убыванию"""
         try:
             result: list[dict[Any]] = sorted(sorted_data, key=lambda i: i["Зарплата"]["от"], reverse=True)
             return result[:top_n]

@@ -47,6 +47,7 @@ class WorkToJSON(JSON):
             print("Введено не корректное имя для файла")
 
     def del_vacancy(self, file_name: str = "vacancy") -> None | list:
+        """Метод очищает файл, но не удаляет его"""
         try:
             with open(f"data/{file_name}.json", "w"):
                 pass

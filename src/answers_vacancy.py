@@ -3,7 +3,9 @@ from typing import Any
 from src.vacancy import SortedVacancyTop
 
 
-def answer(result_list, top_n):
+def answer(result_list: list[dict[Any]], top_n: int) -> list[dict[Any]] | list:
+    """Функция обращается к классу сортировки вакансий в топ-n. Принтует в читаемом формате и
+     возвращает финальный список вакансий"""
     svt = SortedVacancyTop()
     try:
         result: list[dict[Any]] = svt._VacancyTop__sorted_top_n(result_list, top_n)
