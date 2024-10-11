@@ -6,7 +6,7 @@ class Vacancy(ABC):
     """Абстрактный класс получения отфильтрованной информации о вакансии"""
 
     @abstractmethod
-    def _Vacancy__filter_vacancies(self, filter_words: str, json_answer: list[dict[Any]]) -> list[dict[Any]]:
+    def _Vacancy__filter_vacancies(self, filter_words: str, json_answer: list[dict[Any]]) -> list[dict[Any]] | list:
         pass
 
 
@@ -15,7 +15,7 @@ class FilterVacancy(Vacancy):
 
     __slots__ = ("filter_words", "json_answer")
 
-    def _Vacancy__filter_vacancies(self, filter_words: str, json_answer: list[dict[Any]]) -> list[dict[Any]]:
+    def _Vacancy__filter_vacancies(self, filter_words: str, json_answer: list[dict[Any]]) -> list[dict[Any]] | list:
         """Метод фильтрует список с вакансиями с сайта hh.ru и возвращает читаемый формат с 4 показателями:
         Названием вакансии, ссылкой на вакансию, зарплатой и требуемым опытом работы"""
         self.result_list: list = []
@@ -54,7 +54,7 @@ class VacancySalary(ABC):
     """Абстрактный класс сортировки списка ваканчий по значению зарплаты ОТ"""
 
     @abstractmethod
-    def _VacancySalary__salary_range(self, sorted_list: list[dict[Any]], user_from: int) -> list[dict[Any]] | list:
+    def _VacancySalary__salary_range(self, sorted_list: list[dict[Any]], user_from: int = 0) -> list[dict[Any]] | list:
         pass
 
 
@@ -77,11 +77,12 @@ class FilterVacancySalary(VacancySalary):
             print(e)
             return []
 
+
 class VacancyTop(ABC):
     """Абстрактный класс сортировки списка вакансий"""
 
     @abstractmethod
-    def _VacancyTop__sorted_top_n(self, sorted_data: list[dict[Any]], top_n: int) -> list[dict[Any]] | list:
+    def _VacancyTop__sorted_top_n(self, sorted_data: list[dict[Any]], top_n: int = 5) -> list[dict[Any]] | list:
         pass
 
 

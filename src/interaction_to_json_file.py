@@ -15,7 +15,7 @@ class JSON(ABC):
         pass
 
     @abstractmethod
-    def del_vacancy(self, number) -> None:
+    def del_vacancy(self, file_name: str = "vacancy") -> None:
         pass
 
 
@@ -46,10 +46,10 @@ class WorkToJSON(JSON):
         except Exception:
             print("Введено не корректное имя для файла")
 
-    def del_vacancy(self, file_name: str = "vacancy") -> None | list:
+    def del_vacancy(self, file_name: str = "vacancy") -> None:
         """Метод очищает файл, но не удаляет его"""
         try:
             with open(f"data/{file_name}.json", "w"):
                 pass
-        except Exception:
-            return []
+        except Exception as e:
+            print(e)

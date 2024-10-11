@@ -9,12 +9,12 @@ class ImportAPI(ABC):
 
     @abstractmethod
     # """Абстрактный метод получения ответа от API"""
-    def _ImportAPI__get_vacancies(self, keyword: str) -> dict[list[dict[Any]]]:
+    def _ImportAPI__get_vacancies(self, keyword: str) -> dict[list[dict[Any]]] | None:
         pass
 
     @abstractmethod
     # """Абстрактный метод преобразование ответа от API в json формат"""
-    def json_list(self, keyword: str) -> list[dict[Any]]:
+    def json_list(self, keyword: str) -> list[dict[Any]] | list:
         pass
 
 
@@ -22,11 +22,12 @@ class HeadHunterAPI(ImportAPI):
     """Класс работы с API head hunter"""
 
     def __init__(self):
+        """Инициализация параметров для работы с api hh.ru"""
         self.__url: str = "https://api.hh.ru/vacancies"
         self.__params: dict[str | int] = {"text": "", "page": 0, "per_page": 100}
         self.__vacancies: list = []
 
-    def _ImportAPI__get_vacancies(self, keyword: str) -> dict[Any | list[dict[Any]]]:
+    def _ImportAPI__get_vacancies(self, keyword: str) -> dict[Any | list[dict[Any]]] | None:
         """В методе получаются данные с сайта HH.ru'"""
         if isinstance(keyword, str):
             self.__params["text"] = keyword
@@ -38,6 +39,10 @@ class HeadHunterAPI(ImportAPI):
         else:
             raise AttributeError("Введен не корретный запрос")
 
-    def json_list(self, keyword) -> list[dict[Any]]:
+    def json_list(self, keyword: str) -> list[dict[Any]] | list:
         """В методе происходит фильтрация данных полученных с сайта HH.ru по ключу 'items'"""
-        return self._ImportAPI__get_vacancies(keyword).json().get("items")
+        try:
+            return self._ImportAPI__get_vacancies(keyword).json().get("items")
+        except Exception as e:
+            print(e)
+            return []

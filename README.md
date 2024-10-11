@@ -62,7 +62,7 @@ https://hh.ru/vacancy/108435856
 При вводе да - файл очистится, но не удалится.
 
 ## Code coverage
-Code coverage достигает 87%
+Code coverage достигает 86%
 
 ## Лицензии
 Проект распространяеется под [лицензией MIT](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)

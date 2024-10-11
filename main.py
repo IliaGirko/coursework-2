@@ -5,7 +5,7 @@ from src.answers_vacancy import answer
 
 from typing import Any
 
-def main():
+def main() -> None:
     """Функция взаимодействия с пользователем"""
     try:
         search_query = input("Введите поисковый запрос: ")# Пример: Python
